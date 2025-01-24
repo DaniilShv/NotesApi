@@ -17,6 +17,12 @@ public class NoteService(INoteRepository _repository) : INoteService
         await _repository.CreateNoteAsync(note);
     }
 
+    public async Task RemoveNoteAsync(Guid id)
+    {
+        var note = await _repository.GetByIdAsync(id);
+        await _repository.RemoveNoteAsync(note);
+    }
+
     public async Task<List<Note>> GetAllNotesAsync(Guid userId)
     {
         return await _repository.GetAllNotesAsync(userId);

@@ -8,5 +8,6 @@ namespace NotesApi.Infrastructure.Repository.Interfaces
         Task UpdateNoteAsync(Guid id, string newDescription);
         Task<Note> GetByIdAsync(Guid id);
         Task<List<Note>> GetAllNotesAsync(Guid userId);
+        Task RemoveNoteAsync(Note note);
     }
 }

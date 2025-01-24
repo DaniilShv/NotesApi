@@ -13,6 +13,12 @@ namespace NotesApi.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task RemoveNoteAsync(Note note)
+        {
+            _context.Notes.Remove(note);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<Note>> GetAllNotesAsync(Guid userId)
         {
             return await _context.Notes.Where(x => x.UserId == userId).ToListAsync();

@@ -26,7 +26,7 @@ namespace NotesApi.Controllers
 
         [HttpGet]
         [Route("LoginUser/{email}-{password}")]
-        public async Task<User?>LoginUser(string email, string password)
+        public async Task<User?> LoginUser(string email, string password)
         {
             var user = await _userService.ValidateUser(email, password);
             if (user != null)
@@ -40,7 +40,7 @@ namespace NotesApi.Controllers
 
         [HttpPut]
         [Route("UpdateNote/{id}-{description}")]
-        public async Task<IActionResult>UpdateNote(Guid id, string description)
+        public async Task<IActionResult> UpdateNote(Guid id, string description)
         {
             await _noteService.UpdatedNoteAsync(id, description);
             return Ok("Заметка обновлена");
@@ -51,6 +51,12 @@ namespace NotesApi.Controllers
         public async Task<List<Note>> GetAllNotes(Guid userId)
         {
             return await _noteService.GetAllNotesAsync(userId);
+        }
+        [HttpDelete]
+        [Route("RemoveNoteById/{id}")]
+        public async Task RemoveNoteById(Guid id)
+        {
+            await _noteService.RemoveNoteAsync(id);
         }
     }
 }
