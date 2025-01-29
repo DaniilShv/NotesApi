@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NotesApi.Core.Entities;
 using NotesApi.Services.Interfaces;
 using NotesApi.Services.Jwt;
@@ -18,6 +19,7 @@ namespace NotesApi.Controllers
 
         [HttpPost]
         [Route("CreateNote/{userId}-{name}-{description}")]
+        [Authorize]
         public async Task<IActionResult> CreateNote(Guid userId, string name, string description)
         {
             await _noteService.CreateNoteAsync(userId, name, description);
@@ -39,6 +41,7 @@ namespace NotesApi.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("UpdateNote/{id}-{description}")]
         public async Task<IActionResult> UpdateNote(Guid id, string description)
         {
@@ -47,12 +50,14 @@ namespace NotesApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("GetAllNotes/{userId}")]
         public async Task<List<Note>> GetAllNotes(Guid userId)
         {
             return await _noteService.GetAllNotesAsync(userId);
         }
         [HttpDelete]
+        [Authorize]
         [Route("RemoveNoteById/{id}")]
         public async Task RemoveNoteById(Guid id)
         {

@@ -20,6 +20,7 @@ public class NoteService(INoteRepository _repository) : INoteService
     public async Task RemoveNoteAsync(Guid id)
     {
         var note = await _repository.GetByIdAsync(id);
+        note.UpdatedAt = DateTime.UtcNow;
         await _repository.RemoveNoteAsync(note);
     }
 
